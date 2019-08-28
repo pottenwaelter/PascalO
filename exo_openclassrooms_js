@@ -1,0 +1,91 @@
+/* TODO pour programme:
+- Créer classe pour les contacts + objets => objets sont les contacts à entrer
+- Faire boucle while pour répéter les choix du gestionnaire => si choix = 0, la boucle se termine
+- Créer des fonctions pour chaque action du gestionnaire => ajouter contact, lister contacts
+- Afficher la liste des choix de l'user : lister, ajouter, quitter
+- Insérer les contacts dans un tableau
+- Switch case pour basculer entre les choix
+ */
+
+
+
+alert("Bienvenue dans le gestionnaire des contacts !");
+
+
+class Contact {
+        constructor(nom, prenom) {
+            this.nom = nom;
+            this.prenom = prenom; 
+        }
+
+        decrire() {
+            return `Nom : ${this.nom}, Prénom : ${this.prenom}`;
+        }
+}
+
+
+const contact1 = new Contact("Lévisse", "Carole");
+const contact2 = new Contact("Nelsonne", "Mélodie");
+
+//Création du tableau de contacts
+
+const contacts = [];
+contacts.push(contact1);
+contacts.push(contact2);
+
+//Définition des fonctions à utiliser
+
+function affichageMenu() {
+        const menu = "1 : Lister les contacts \n2 : Ajouter un contact\n0 : Quitter";
+        console.log(menu);
+}
+
+
+function listeContacts(contacts) {
+        console.log("Voici la liste de tous vos contacts :");
+        contacts.forEach(contact => { 
+            console.log(`${contact.decrire()}`);
+        })
+}
+
+
+function ajoutContact(nom, prenom) {
+        const nouvContact = new Contact(nom, prenom);
+        contacts.push(nouvContact);
+        console.log("Le nouveau contact a été ajouté.");
+
+}
+
+
+
+// Initiation de la boucle
+
+let choixUtilisateur;
+
+while (choixUtilisateur !== "0") {
+    affichageMenu();
+    choixUtilisateur = prompt("Choisissez une option parmi 0, 1 ou 2");
+
+    switch(choixUtilisateur) {
+            case "1":
+                listeContacts(contacts);
+
+                break;
+            
+            case "2":
+                let nom = prompt("Entrez le nom du contact :");
+                let prenom = prompt("Entrez le prénom du contact");
+                ajoutContact(nom, prenom);
+
+                break;
+            
+            case "0":
+                console.log("À bientôt !");
+                
+                break;
+
+             default:
+                 console.log("Votre requête est incorrecte.");   
+    }
+    
+}
